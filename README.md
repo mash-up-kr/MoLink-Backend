@@ -1,4 +1,4 @@
-# MoLink-Backenda
+# MoLink-Backend
 모여라!! 링크(MoLink)
 
 - IDE : IntelliJ
