@@ -1,4 +1,4 @@
-package com.mashup.molinkbackend.folder;
+package com.mashup.molinkbackend.entity;
 
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
