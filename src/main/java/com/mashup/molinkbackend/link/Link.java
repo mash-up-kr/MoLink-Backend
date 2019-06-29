@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 public class Link extends BaseTimeEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long link_id;
+  private Long linkId;
 
   @Column(length = 50)
   private String name;
