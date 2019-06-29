@@ -2,8 +2,6 @@ package com.mashup.molinkbackend.folder;
 
 import com.mashup.molinkbackend.entity.BaseTimeEntity;
 import com.mashup.molinkbackend.link.Link;
-import java.util.HashSet;
-import java.util.Set;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;

@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
@@ -26,7 +27,6 @@ public class FolderRepositoryTest {
     }
 
     @Test
-    @Transactional
     public void 폴더_생성() {
         //given
         LocalDateTime now = LocalDateTime.now();
@@ -43,5 +43,26 @@ public class FolderRepositoryTest {
         Folder folder = folders.get(0);
         assertTrue(folder.getCreatedDate().isAfter(now));
         assertTrue(folder.getModifiedDate().isAfter(now));
+    }
+
+    @Test
+    public void 폴더_자기_참조() {
+        folderRepository.save(Folder.builder()
+                .name("폴더1")
+                .color("#1111")
+                .parentId(null)
+                .build());
+        List<Folder> folders1 = folderRepository.findAll();
+        Folder folder = folders1.get(0);
+
+        folderRepository.save(Folder.builder()
+                .name("폴더2")
+                .color("#2222")
+                .parentId(folder.getId())
+                .build());
+        List<Folder> folders2 = folderRepository.findAll();
+        Folder folder1 = folders2.get(0);
+        Folder folder2 = folders2.get(1);
+        assertEquals(folder1.getId(), folder2.getParentId());
     }
 }
