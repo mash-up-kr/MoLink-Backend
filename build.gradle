@@ -1,9 +1,19 @@
+//JPA에서 LocalDate 출력을 위해 추가
+buildscript {
+    dependencies {
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.4.RELEASE"
+    }
+}
+
 plugins {
     id 'org.springframework.boot' version '2.1.6.RELEASE'
     id 'java'
 }
 
 apply plugin: 'io.spring.dependency-management'
+
+//LocalDate 출력을 위해 Spring boot Overriding 추가
+ext['hibernate.version'] = '5.2.11.Final'
 
 group = 'com.mashup'
 version = '0.0.1-SNAPSHOT'
@@ -22,9 +32,12 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    compileOnly 'org.projectlombok:lombok'
+
     runtimeOnly 'com.h2database:h2'
     runtimeOnly 'mysql:mysql-connector-java'
+
+    compileOnly 'org.projectlombok:lombok:1.16.20'
     annotationProcessor 'org.projectlombok:lombok'
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }

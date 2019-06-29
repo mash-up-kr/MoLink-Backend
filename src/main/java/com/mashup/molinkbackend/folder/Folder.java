@@ -1,6 +1,9 @@
 package com.mashup.molinkbackend.folder;
 
 import com.mashup.molinkbackend.entity.BaseTimeEntity;
+import com.mashup.molinkbackend.link.Link;
+import java.util.HashSet;
+import java.util.Set;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,10 +15,9 @@ import javax.persistence.*;
 @Getter
 @Entity
 public class Folder extends BaseTimeEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer folder_id;
 
     @Column(length = 40)
     private String name;
@@ -23,6 +25,7 @@ public class Folder extends BaseTimeEntity {
     @Column(length = 20)
     private String color;
 
+    @Column(name = "parent_id")
     private Integer parentId;
 
     @Builder
