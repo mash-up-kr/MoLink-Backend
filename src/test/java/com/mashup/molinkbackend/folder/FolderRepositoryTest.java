@@ -58,11 +58,11 @@ public class FolderRepositoryTest {
         folderRepository.save(Folder.builder()
                 .name("폴더2")
                 .color("#2222")
-                .parentId(folder.getId())
+                .parentId(folder.getFolderId())
                 .build());
         List<Folder> folders2 = folderRepository.findAll();
         Folder folder1 = folders2.get(0);
         Folder folder2 = folders2.get(1);
-        assertEquals(folder1.getId(), folder2.getParentId());
+        assertEquals(folder1.getFolderId(), folder2.getParentId());
     }
 }
