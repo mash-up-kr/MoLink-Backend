@@ -13,7 +13,7 @@ public class FolderController {
 
     private final FolderService folderService;
 
-    @PostMapping("/folders/new")
+    @PostMapping("/folders")
     public ResponseEntity<Void> saveFolder(@RequestBody ReqSaveFolderDto folderSaveRequestDto) {
         folderService.save(folderSaveRequestDto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
