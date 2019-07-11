@@ -2,20 +2,22 @@ package com.mashup.molinkbackend.folder;
 
 import com.mashup.molinkbackend.entity.BaseTimeEntity;
 import com.mashup.molinkbackend.link.Link;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Getter
+
+@Builder
+@AllArgsConstructor @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter @Setter @EqualsAndHashCode(of = "id")
 @Entity
 public class Folder extends BaseTimeEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long folderId;
+    private Long id;
 
     @Column(length = 40)
     private String name;
@@ -23,13 +25,18 @@ public class Folder extends BaseTimeEntity {
     @Column(length = 20)
     private String color;
 
-    @Column(name = "parent_id")
-    private Long parentId;
+    // Parent Folder 필드
+    @ManyToOne
+    @JoinColumn(name = "parent_folder_id")
+    private Folder folder;
 
-    @Builder
-    public Folder(String name, String color, Long parentId) {
-        this.name = name;
-        this.color = color;
-        this.parentId = parentId;
-    }
+    @Column(name = "user_id", length = 20)
+    private Long userId;
+
+    @OneToMany(mappedBy = "folder", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Folder> folders = new ArrayList<>();
+
+    @OneToMany(mappedBy = "folder", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Link> links = new ArrayList<>();
+
 }
