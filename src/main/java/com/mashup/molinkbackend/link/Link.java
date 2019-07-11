@@ -10,17 +10,23 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Getter
+
+@Builder
+@AllArgsConstructor @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter @Setter
+@EqualsAndHashCode(of = "id")
 @Entity
 public class Link extends BaseTimeEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long linkId;
+  private Long id;
 
   @Column(length = 50)
   private String name;
@@ -29,13 +35,6 @@ public class Link extends BaseTimeEntity {
   private String url;
 
   @ManyToOne
-  @JoinColumn(name = "folder_id")
+  @JoinColumn(name = "parent_id")
   private Folder folder;
-
-  @Builder
-  public Link(String name, String url, Folder folder) {
-    this.name = name;
-    this.url = url;
-    this.folder = folder;
-  }
 }

@@ -1,5 +1,5 @@
 package com.mashup.molinkbackend.link;
 
-public class LinkRepository {
+public interface LinkRepository {
 
 }
